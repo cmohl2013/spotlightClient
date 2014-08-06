@@ -37,7 +37,7 @@ fileToImgElement = function(file, img_element) {
 
 
 
-// size the content area
+// get size of content area
 contentAreaDimensions = (function () {
   	var get = function () {
    		var isFirstPass = false,
@@ -59,9 +59,9 @@ contentAreaDimensions = (function () {
 
 resizeCanvasElement = function (canvas_element) {
   var dims = contentAreaDimensions.get();
-  canvas_element.attr({
-    width: dims.width - 4,
-    height: dims.height - 4
-  });
+  offset = 20;
+  canvas_element.attr('width', dims.width - offset);
+  canvas_element.attr('height', dims.height - offset);
+
   return dims;
 };	
