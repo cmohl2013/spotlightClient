@@ -1,14 +1,21 @@
 //manages all user input callbacks of index.html
 
 $( document ).ready(function() {
+	resizeCanvasElement($('#mainStage'));
+	//$('#selectFileButton').change(function(e) {
+    //    var file = e.target.files[0];
+    //    fileToImgElement(file,$('#testImage'));       
+    //});
 
-	$('#selectFileButton').change(function(e) {
-        var file = e.target.files[0];
-        fileToImgElement(file,$('#testImage'));       
-    });
+
+	
+
+   
+
+});
 
 
-	function fileToImgElement(file, img_element) {
+fileToImgElement = function(file, img_element) {
 
 		//check if file is an image
 		imageType = /image.*/; //i guess this is a regex pattern
@@ -28,6 +35,33 @@ $( document ).ready(function() {
 		reader.readAsDataURL(file); 
 	}
 
-   
 
-});
+
+// size the content area
+contentAreaDimensions = (function () {
+  	var get = function () {
+   		var isFirstPass = false,
+       		isIPhone = (/iphone/gi).test(navigator.appVersion),
+		
+ 		width = $(window).width(),
+ 		height = $(window).height() + (isIPhone ?  60 : 0),
+ 		hHeight = $('header').outerHeight() || 0,
+ 		fHeight = $('footer').outerHeight() || 0;
+   		return {
+    		width: width,
+      		height: height - hHeight - fHeight
+    	};
+  	};
+  	return {
+    	get: get
+  	};
+}());
+
+resizeCanvasElement = function (canvas_element) {
+  var dims = contentAreaDimensions.get();
+  canvas_element.attr({
+    width: dims.width - 4,
+    height: dims.height - 4
+  });
+  return dims;
+};	
