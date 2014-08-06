@@ -40,6 +40,7 @@ fileToImgElement = function(file, img_element) {
 // get size of content area
 contentAreaDimensions = (function () {
   	var get = function () {
+   		/*
    		var isFirstPass = false,
        		isIPhone = (/iphone/gi).test(navigator.appVersion),
 		
@@ -51,6 +52,12 @@ contentAreaDimensions = (function () {
     		width: width,
       		height: height - hHeight - fHeight
     	};
+    	*/
+    	
+    	return {
+    		width: $('#contentDiv').outerWidth() || 0,
+    		height: $('#contentDiv').outerHeight() || 0
+    	}
   	};
   	return {
     	get: get
@@ -59,7 +66,7 @@ contentAreaDimensions = (function () {
 
 resizeCanvasElement = function (canvas_element) {
   var dims = contentAreaDimensions.get();
-  offset = 20;
+  offset = 0;
   canvas_element.attr('width', dims.width - offset);
   canvas_element.attr('height', dims.height - offset);
 
